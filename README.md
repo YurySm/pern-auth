@@ -1,23 +1,24 @@
 # PERN - AUTH
 
 ## Backand
- - [Nest](https://nestjs.com/) 
- - [Prisma](https://www.prisma.io/)
- - PostgreSQL 
+ - [Nest](https://nestjs.com/): прогрессивный фреймворк для создания серверных приложений на TypeScript.
+ - [Prisma](https://www.prisma.io/): ORM для управления базой данных с использованием TypeScript и схем.
+ - PostgreSQL: мощная объектно-реляционная база данных.
 
-Реализавна авторизация с 2 токенами
+Реализована система авторизации с двумя токенами (access и refresh), обеспечивающая безопасную аутентификацию пользователей.
 
 ## Frtontand
- - [Next](https://nextjs.org/)
- - [@reduxjs/toolkit](https://redux-toolkit.js.org/)
+ - [Next](https://nextjs.org/): фреймворк React для серверного рендеринга и статических сайтов.
+ - [@reduxjs/toolkit](https://redux-toolkit.js.org/): современный инструмент для управления состоянием в React приложениях.
 
-Все приложение упаковано в Docker.
-Есть также контейнер [pgadmin4](https://hub.docker.com/r/dpage/pgadmin4/)
+## Дополнительно:
+ - Приложение полностью упаковано в Docker для удобного развертывания.
+ - В составе также есть контейнер для [pgadmin4](https://hub.docker.com/r/dpage/pgadmin4/) — удобный интерфейс для управления PostgreSQL базой данных.
 
-## Для запуска
 
+## Инструкция по запуску
+Для запуска приложения используйте следующую команду:
 ```bash
 docker-compose up -d
 ```
-
-Открыть в браузере [http://localhost:3000](http://localhost:3000)
+Затем откройте в браузере [http://localhost:3000](http://localhost:3000) для доступа к фронтенду приложения.
