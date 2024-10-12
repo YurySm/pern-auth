@@ -1,0 +1,54 @@
+services:
+  auth.postgres:
+    image: postgres:13.5
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: auth
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+#    ports:
+#      - '5432:5432'
+
+  auth.api:
+    build: ./auth-back
+    container_name: api
+    restart: always
+    depends_on:
+      - auth.postgres
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./auth-back:/app
+      - /app/node_modules
+    command: >
+      sh -c "npx prisma db push && npm run dev"
+
+  auth.front:
+    build: ./auth-front
+    container_name: front
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./auth-front:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - auth.api
+
+  auth.pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin4
+    ports:
+      - '5050:80'
+    depends_on:
+      - auth.postgres
+
+volumes:
+  postgres_data:
